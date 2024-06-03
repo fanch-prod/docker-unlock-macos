@@ -9,7 +9,7 @@
 [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/StasPlov/docker-unlock/blob/master/README.md)
 [![ru](https://img.shields.io/badge/lang-ru-blue.svg)](https://github.com/StasPlov/docker-unlock/blob/master/README.ru.md)
 
-# Docker-Unlock
+# Docker-Unlock for MacOS
 Unlocks docker hub in Russia, Cuba, Iran, North Korea, Republic of Crimea, Sudan, and Syria
 
 ### How to Use
