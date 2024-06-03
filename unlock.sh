@@ -10,11 +10,11 @@ new_mirrors=(
   "https://registry.docker-cn.com"
 )
 
-if [ -f /etc/docker/daemon.json ]; then
-  echo "File /etc/docker/daemon.json exists. Updating the content."
-  current_mirrors=$(grep -oP '(?<="registry-mirrors": \[)[^]]*' /etc/docker/daemon.json | tr -d ' \n' | tr ',' '\n' | tr -d '"')
+if [ -f ~/.docker/daemon.json ]; then
+  echo "File ~/.docker/daemon.json exists. Updating the content."
+  current_mirrors=$(grep -o '(?<="registry-mirrors": \[)[^]]*' ~/.docker/daemon.json | tr -d ' \n' | tr ',' '\n' | tr -d '"')
 else
-  echo "File /etc/docker/daemon.json does not exist. Creating a new file."
+  echo "File ~/.docker/daemon.json does not exist. Creating a new file."
   current_mirrors=""
 fi
 
@@ -29,7 +29,7 @@ new_content=$(echo -e "$new_content" | sed '$ s/,$//')
 new_content=$(echo -e "$new_content" | sed '$ s/,$//')
 new_content="${new_content}\n  ]\n}"
 
-echo -e "$new_content" | sudo tee /etc/docker/daemon.json > /dev/null
+echo -e "$new_content" | tee ~/.docker/daemon.json > /dev/null
 
 # ANSI color codes
 GREEN='\033[0;32m'
@@ -39,7 +39,7 @@ NOCOLOR='\033[0m'
 while true; do
     read -p "Restart Docker now? (y/N): "
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-        sudo systemctl restart docker
+        osascript -e 'quit app "Docker"' && open -a Docker
 		echo
 		echo -e "${GREEN}Docker restarted.${NOCOLOR}"
         break
